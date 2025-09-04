@@ -25,14 +25,11 @@ const ContactForm = ({ onSubmit, onClose }) => {
     setLoading(true);
     setStatus(null);
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/api/add-contact`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      const res = await fetch("/api/add-contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
       setFormData({
@@ -102,7 +99,7 @@ const ContactForm = ({ onSubmit, onClose }) => {
                 onChange={handleInputChange}
                 required
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white/90 placeholder-gray-500 focus:outline-none focus:bg-white/10 text-sm"
-                placeholder="First Name"
+                placeholder="First Name*"
               />
               <input
                 type="text"
@@ -112,7 +109,7 @@ const ContactForm = ({ onSubmit, onClose }) => {
                 onChange={handleInputChange}
                 required
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white/90 placeholder-gray-500 focus:outline-none focus:bg-white/10 text-sm"
-                placeholder="Last Name"
+                placeholder="Last Name*"
               />
             </div>
 
@@ -125,7 +122,7 @@ const ContactForm = ({ onSubmit, onClose }) => {
                 onChange={handleInputChange}
                 required
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white/90 placeholder-gray-500 focus:outline-none focus:bg-white/10 text-sm"
-                placeholder="Email"
+                placeholder="Email*"
               />
             </div>
 
@@ -147,7 +144,6 @@ const ContactForm = ({ onSubmit, onClose }) => {
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
-                required
                 rows="3"
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white/90 placeholder-gray-500 focus:outline-none focus:bg-white/10 text-sm resize-none"
                 placeholder="Message"
