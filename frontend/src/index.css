@@ -1,0 +1,154 @@
+/* -----------------------------------------------------
+   1. Import Fonts
+   ----------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+/* Thunder is local — place files in /public/fonts */
+
+@font-face {
+  font-family: "Thunder";
+  src: url("/fonts/Thunder-BoldLC.woff2") format("woff2"),
+    url("/fonts/Thunder-BoldLC.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Thunder";
+  src: url("/fonts/Thunder-ExtraBoldLC.woff2") format("woff2"),
+    url("/fonts/Thunder-ExtraBoldLC.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* -----------------------------------------------------
+   2. Import Tailwind
+   ----------------------------------------------------- */
+@import "tailwindcss";
+
+/* -----------------------------------------------------
+   3. Tailwind Theme Tokens (fonts)
+   ----------------------------------------------------- */
+@theme {
+  /* Colors */
+  --color-primary-black: #181818;
+  --color-primary-gray: #9dacb1;
+  --color-secondary-gray: #585857;
+  --color-secondary: #64748b;
+  --color-accent: #8b5cf6;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-dark: #1e293b;
+
+  /* Fonts */
+  --font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  --font-display: "Thunder", system-ui, sans-serif;
+
+  /* Headings */
+  --heading-line-height-tight: 0.95;
+  --heading-letter-spacing: 1px;
+
+  --text-h1: clamp(2.75rem, 7vw, 4.5rem);
+  --text-h2: clamp(2.25rem, 5vw, 4.5rem);
+  --text-h3: clamp(1.75rem, 3.5vw, 2.75rem);
+  --text-h4: clamp(1.5rem, 2vw, 2rem);
+  --text-h5: clamp(1.125rem, 1.8vw, 1.5rem);
+
+  --text-h1-quote: clamp(2rem, 5vw, 3.75rem);
+}
+
+/* -----------------------------------------------------
+   4. Base styles
+   ----------------------------------------------------- */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply text-white bg-primary-black;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: var(--heading-letter-spacing);
+    line-height: var(--heading-line-height-tight);
+  }
+
+  h1 {
+    font-size: var(--text-h1);
+    font-weight: 800;
+  }
+  h2 {
+    font-size: var(--text-h2);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: var(--text-h3);
+    font-weight: 500;
+  }
+  h4 {
+    font-size: var(--text-h4);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  h5 {
+    font-size: var(--text-h5);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+  h6 {
+    @apply text-base font-medium;
+  }
+}
+
+/* -----------------------------------------------------
+   5. Component utilities
+   ----------------------------------------------------- */
+@layer components {
+  .h1-quote {
+    font-size: var(--text-h1-quote);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    font-family: var(--font-display);
+  }
+
+  .common-container {
+    @apply container py-20 lg:py-36 px-8 lg:px-12 mx-auto w-full;
+  }
+
+  .btn-primary {
+    @apply text-base font-medium px-6 py-2.5 text-white bg-secondary-gray hover:bg-secondary-gray/80 border-2 border-transparent hover:border-white/70 transition-all duration-200 ease-linear rounded-lg cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply text-sm font-medium px-4 py-1.5 text-black bg-gray-200 hover:bg-white/70 border-2 border-transparent hover:border-white/70 transition-all duration-200 ease-linear rounded-lg cursor-pointer;
+  }
+  .black-gray-text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-[#0F0F0F] to-[#6B6B6B];
+  }
+
+  @keyframes pulse-white {
+    0%,
+    100% {
+      filter: none;
+    }
+    50% {
+      opacity: 0.8;
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  .animate-pulse-white {
+    animation: pulse-white 4s infinite;
+  }
+}
