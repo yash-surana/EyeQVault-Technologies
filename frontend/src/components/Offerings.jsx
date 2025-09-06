@@ -104,7 +104,6 @@ const Offerings = ({ onContactClick }) => {
                 role="tab"
                 aria-controls={`tab-panel-${tab.id}`}
                 id={`tab-${tab.id}`}
-                variants={itemVariants}
                 whileTap={{ scale: 0.95 }}
               >
                 {tab.title}
