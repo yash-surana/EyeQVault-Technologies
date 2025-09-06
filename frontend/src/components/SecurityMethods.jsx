@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import DiamondSteps from "./DiamondSteps";
+import DiamondSVG from "../assets/illustrations/diamond.svg";
+import { imageCardHoverVariants } from "../utils/animationVariants";
 
 const steps = [
   {
@@ -56,7 +58,7 @@ const steps = [
       "When threats are detected, swift action is critical. We implement immediate containment and neutralization protocols to minimize impact and prevent spread.",
   },
   {
-    title: "Back to Diagnose & Detect",
+    title: "Diagnose & Detect",
     description:
       "Post-incident analysis ensures we learn from every security event. We conduct thorough forensic analysis to understand attack vectors and strengthen defenses.",
   },
@@ -140,7 +142,13 @@ const SecurityMethods = () => {
                 onClick={() => handleStepClick(index)}
               >
                 <h3 className="text-h4 black-gray-text-gradient">
-                  {index + 1}. {step.title}
+                  {index + 1}.{" "}
+                  <span>
+                    <span className="text-blue-900">
+                      {step.title.charAt(0)}
+                    </span>
+                    {step.title.slice(1)}
+                  </span>
                 </h3>
                 <p className="pt-6 text-sm text-gray-800 flex-grow">
                   {step.description}
@@ -170,7 +178,13 @@ const SecurityMethods = () => {
                 onClick={() => handleStepClick(index + 4)}
               >
                 <h3 className="text-h4 black-gray-text-gradient">
-                  {index + 5}. {step.title}
+                  {index + 5}.{" "}
+                  <span>
+                    <span className="text-blue-900">
+                      {step.title.charAt(0)}
+                    </span>
+                    {step.title.slice(1)}
+                  </span>
                 </h3>
                 <p className="pt-6 text-sm text-gray-800 flex-grow">
                   {step.description}
@@ -189,8 +203,23 @@ const SecurityMethods = () => {
           </div>
 
           {/* Diamond steps */}
-          <div className="order-3 lg:order-2 flex w-full justify-center items-center mt-6 hover:translate-y-3 transition-all duration-300">
-            <DiamondSteps activeStep={activeStep + 1} />
+          <div className="order-3 lg:order-2 flex w-full justify-center items-center mt-6 relative">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="z-0"
+              whileHover={imageCardHoverVariants.hoverWithMovement}
+            >
+              <img
+                src={DiamondSVG}
+                alt="Diamond background"
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
+            {/* <div className="relative z-10">
+              <DiamondSteps activeStep={activeStep + 1} />
+            </div> */}
           </div>
         </div>
       </div>

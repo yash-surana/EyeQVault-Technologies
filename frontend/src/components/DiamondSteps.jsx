@@ -3,8 +3,8 @@ const DiamondSteps = ({ activeStep = 1, className = "" }) => {
   const getStepStyle = (stepNumber) => {
     const isActive = activeStep === stepNumber;
     return {
-      transform: isActive ? "scale(1.05)" : "scale(0.95)",
-      opacity: isActive ? 1 : 0.5,
+      // transform: isActive ? "scale(1.05)" : "scale(0.95)",
+      opacity: isActive ? 1 : 0.6,
       transition: "all 0.3s ease-in-out",
       transformOrigin: "center",
     };
