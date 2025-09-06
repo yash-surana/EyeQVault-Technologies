@@ -129,7 +129,7 @@ const SecurityMethods = () => {
           </p>
         </motion.div>
         <div className="flex flex-col">
-          <div className="order-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
             {steps.slice(0, 4).map((step, index) => (
               <div
                 key={index}
@@ -165,7 +165,7 @@ const SecurityMethods = () => {
               </div>
             ))}
           </div>
-          <div className="order-2 lg:order-3 grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 items-start">
+          <div className=" grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 items-start">
             {steps.slice(4).map((step, index) => (
               <div
                 key={index + 4}
@@ -203,7 +203,7 @@ const SecurityMethods = () => {
           </div>
 
           {/* Diamond steps */}
-          <div className="order-3 lg:order-2 flex w-full justify-center items-center mt-6 relative">
+          <div className=" flex w-full justify-center items-center mt-6 relative">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
