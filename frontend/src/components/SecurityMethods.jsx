@@ -165,6 +165,25 @@ const SecurityMethods = () => {
               </div>
             ))}
           </div>
+          {/* Diamond steps */}
+          <div className=" flex w-full justify-center items-center mt-6 relative">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="z-0"
+              whileHover={imageCardHoverVariants.hoverWithMovement}
+            >
+              <img
+                src={DiamondSVG}
+                alt="Diamond Framework"
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
+            {/* <div className="relative z-10">
+              <DiamondSteps activeStep={activeStep + 1} />
+            </div> */}
+          </div>
           <div className=" grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 items-start">
             {steps.slice(4).map((step, index) => (
               <div
@@ -200,26 +219,6 @@ const SecurityMethods = () => {
                 ) : null}
               </div>
             ))}
-          </div>
-
-          {/* Diamond steps */}
-          <div className=" flex w-full justify-center items-center mt-6 relative">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="z-0"
-              whileHover={imageCardHoverVariants.hoverWithMovement}
-            >
-              <img
-                src={DiamondSVG}
-                alt="Diamond background"
-                className="w-full h-full object-contain"
-              />
-            </motion.div>
-            {/* <div className="relative z-10">
-              <DiamondSteps activeStep={activeStep + 1} />
-            </div> */}
           </div>
         </div>
       </div>
