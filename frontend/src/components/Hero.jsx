@@ -119,22 +119,22 @@ const Hero = ({ onContactClick }) => {
       />
 
       {/* Content */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-end px-6 lg:px-16 gap-8">
-        {/* Main content area */}
-        <div className="flex-grow flex flex-col justify-end items-start text-left pt-16 lg:max-w-[70vw]">
-          <AnimatePresence mode="wait">
-            <motion.h1
-              key={`title-${currentSlide}`}
-              className="text-white h1-quote"
-              id="hero-heading"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              {slides[currentSlide].title}
-            </motion.h1>
-          </AnimatePresence>
+        <div className="relative z-10 min-h-screen flex flex-col justify-end px-6 lg:px-16 gap-8">
+          {/* Main content area */}
+          <div className="flex-grow flex flex-col justify-end items-start text-left pt-16 lg:max-w-[70vw]">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={`title-${currentSlide}`}
+                className="text-white h1-quote"
+                id={`slide-${currentSlide}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {slides[currentSlide].title}
+              </motion.h1>
+            </AnimatePresence>
 
           <AnimatePresence mode="wait">
             <motion.p

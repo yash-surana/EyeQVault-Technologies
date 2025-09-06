@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import WorldAnimation from "../assets/WorldAnimation.lottie";
+// Remove the direct import
+// import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+// import WorldAnimation from "../assets/WorldAnimation.lottie";
 
 // Logos
 import GOILogo from "../assets/logos/goi.svg";
@@ -16,6 +17,19 @@ import {
   titleVariants,
   backgroundVariants,
 } from "../utils/animationVariants";
+
+// Create a lazy-loaded component for the Lottie animation
+const LottieAnimation = lazy(() => {
+  // Only import the animation when this component is loaded
+  return Promise.all([
+    import("@lottiefiles/dotlottie-react"),
+    import("../assets/WorldAnimation.lottie"),
+  ]).then(([{ DotLottieReact }, WorldAnimation]) => ({
+    default: (props) => (
+      <DotLottieReact src={WorldAnimation.default} {...props} />
+    ),
+  }));
+});
 
 const ActiveThreat = () => {
   const threats = [
@@ -39,9 +53,15 @@ const ActiveThreat = () => {
 
   const ref = useRef(null);
   const sectionRef = useRef(null);
+  const animationRef = useRef(null);
   const isInView = useInView(ref, { once: true });
   const sectionInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const animationInView = useInView(animationRef, {
+    once: true,
+    margin: "200px",
+  });
   const [counters, setCounters] = useState([0, 0, 0, 0]);
+  const [loadAnimation, setLoadAnimation] = useState(false);
 
   useEffect(() => {
     if (isInView) {
@@ -68,6 +88,13 @@ const ActiveThreat = () => {
       });
     }
   }, [isInView]);
+
+  // Add effect to load animation when it's about to come into view
+  useEffect(() => {
+    if (animationInView) {
+      setLoadAnimation(true);
+    }
+  }, [animationInView]);
 
   return (
     <section
@@ -106,7 +133,7 @@ const ActiveThreat = () => {
           animate={sectionInView ? "visible" : "hidden"}
         >
           <motion.div
-            className="w-full grid grid-cols-2 lg:grid-cols-4 gap-20 py-6 px-4 rounded-xl"
+            className="w-full grid grid-cols-2 lg:grid-cols-4 gap-x-20 gap-y-10 py-6 px-4 rounded-xl"
             variants={logoContainerVariants}
           >
             {[GOILogo, MinistryOfFinanceLogo, HomeAffairsLogo, HPLogo].map(
@@ -126,7 +153,9 @@ const ActiveThreat = () => {
                   <img
                     src={logo}
                     alt={`Partner logo ${index + 1}`}
-                    className="max-h-16 max-w-full object-contain"
+                    className="max-h-16 w-full h-full max-w-full object-contain"
+                    width={64}
+                    height={64}
                   />
                 </motion.div>
               )
@@ -203,8 +232,8 @@ const ActiveThreat = () => {
           ))}
         </motion.div>
 
-        {/* Add your dotLottie animation here */}
         <motion.div
+          ref={animationRef}
           className="flex justify-center pt-24 lg:pt-48 pb-12 overflow-hidden -z-10"
           initial={{ opacity: 0, y: 50 }}
           animate={{
@@ -217,34 +246,41 @@ const ActiveThreat = () => {
             ease: "easeOut",
           }}
         >
-          <motion.div
-            whileHover={{
-              scale: 1.05,
-              rotate: 12,
-              transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-              },
-            }}
-            animate={{
-              scale: [1, 1.02, 1],
-              rotate: [0, 1, 0, -1, 0],
-              transition: {
-                duration: 8,
-                ease: "easeInOut",
-                repeat: Infinity,
-                repeatType: "reverse",
-              },
-            }}
-          >
-            <DotLottieReact
-              src={WorldAnimation}
-              loop
-              autoplay
-              className="scale-200 lg:scale-150 transition duration-500 ease-in"
-            />
-          </motion.div>
+          {loadAnimation && (
+            <motion.div
+              whileHover={{
+                scale: 1.05,
+                rotate: 12,
+                transition: {
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 10,
+                },
+              }}
+              animate={{
+                scale: [1, 1.02, 1],
+                rotate: [0, 1, 0, -1, 0],
+                transition: {
+                  duration: 8,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                },
+              }}
+            >
+              <Suspense
+                fallback={
+                  <div className="w-64 h-64 bg-gray-800 rounded-full animate-pulse"></div>
+                }
+              >
+                <LottieAnimation
+                  loop
+                  autoplay
+                  className="scale-200 lg:scale-150 transition duration-500 ease-in"
+                />
+              </Suspense>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>

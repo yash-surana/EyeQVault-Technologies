@@ -90,6 +90,7 @@ const Offerings = ({ onContactClick }) => {
           <motion.div
             className="flex flex-row gap-4 bg-secondary-gray/50 p-2 rounded-lg mb-4"
             variants={itemVariants}
+            role="tablist"
           >
             {tabs.map((tab) => (
               <motion.button
@@ -152,9 +153,9 @@ const Offerings = ({ onContactClick }) => {
               animate="visible"
             >
               <motion.div className="flex-1" variants={itemVariants}>
-                <motion.h4 className="mb-6" variants={titleVariants}>
+                <motion.p className="mb-6 text-h4" variants={titleVariants}>
                   What's included:
-                </motion.h4>
+                </motion.p>
                 <motion.ul
                   className="space-y-6 mb-8"
                   variants={containerVariants}

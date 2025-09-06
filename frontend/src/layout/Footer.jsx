@@ -46,7 +46,14 @@ const Footer = ({ onContactClick }) => {
         animate={isInView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <img src={NameBanner} alt="EyeQVault" className="w-full aspect-auto" />
+        <img
+          src={NameBanner}
+          alt="EyeQVault"
+          loading="lazy"
+          width={1920}
+          height={180}
+          className="w-full aspect-auto"
+        />
       </motion.div>
     </footer>
   );

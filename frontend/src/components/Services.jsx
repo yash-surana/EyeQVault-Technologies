@@ -122,15 +122,12 @@ const Services = () => {
         {/* Bento Grid Layout - Individual Cards */}
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 h-auto w-full"
-          role="list"
-          aria-label="Security services"
           initial="hidden"
           whileInView="visible"
         >
           <motion.article
             className={`${baseCardStyles} ${verticalStyle} `}
             tabIndex="0"
-            role="listitem"
             aria-labelledby={services[0].id}
             whileHover="hoverWithMovement"
             initial="initial"
@@ -160,7 +157,6 @@ const Services = () => {
               <motion.article
                 className={`${baseCardStyles} ${verticalStyle}`}
                 tabIndex="0"
-                role="listitem"
                 aria-labelledby={services[1].id}
                 whileHover="hoverWithMovement"
                 initial="initial"
@@ -186,7 +182,6 @@ const Services = () => {
               <motion.article
                 className={`${baseCardStyles} ${verticalStyle}`}
                 tabIndex="0"
-                role="listitem"
                 aria-labelledby={services[2].id}
                 whileHover="hoverWithMovement"
                 initial="initial"
@@ -212,7 +207,6 @@ const Services = () => {
             <motion.article
               className={`${baseCardStyles} !p-0 flex flex-col-reverse lg:flex-row gap-4 items-center pr-0 h-full`}
               tabIndex="0"
-              role="listitem"
               aria-labelledby={services[3].id}
               whileHover="hover"
               initial="initial"
@@ -239,8 +233,7 @@ const Services = () => {
         {/* Cards 4-6 (Last row) */}
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4 h-auto w-full pt-3 sm:pt-4"
-          role="list"
-          aria-label="Security services"
+          aria-label={services[4].title}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -250,7 +243,6 @@ const Services = () => {
             key={services[4].id}
             className={`${baseCardStyles} ${verticalStyle} group`}
             tabIndex="0"
-            role="listitem"
             aria-labelledby={services[4].id}
             whileHover="hoverWithMovement"
             initial="initial"
@@ -296,7 +288,6 @@ const Services = () => {
             key={services[5].id}
             className={`${baseCardStyles} ${verticalStyle}`}
             tabIndex="0"
-            role="listitem"
             aria-labelledby={services[5].id}
             whileHover="hoverWithMovement"
             initial="initial"
@@ -326,7 +317,6 @@ const Services = () => {
             key={services[6].id}
             className={`${baseCardStyles} ${verticalStyle}`}
             tabIndex="0"
-            role="listitem"
             aria-labelledby={services[6].id}
             whileHover="hoverWithMovement"
             initial="initial"

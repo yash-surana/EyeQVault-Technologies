@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "vite",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -16,7 +17,6 @@
     "framer-motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-hook-form": "^7.62.0",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
