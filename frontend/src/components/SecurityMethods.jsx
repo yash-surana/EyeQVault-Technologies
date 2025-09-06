@@ -153,17 +153,21 @@ const SecurityMethods = () => {
                 <p className="pt-6 text-sm text-gray-800 flex-grow">
                   {step.description}
                 </p>
-                {step.actions &&
-                (activeStep === index ||
-                  !matchMedia("(min-width: 1024px)").matches) ? (
-                  <ul className="list-disc pl-6 mt-4 space-y-2 text-sm text-gray-800">
+                {step.actions && (
+                  <ul
+                    className={`list-disc pl-6 mt-4 space-y-2 text-sm text-gray-800 ${
+                      activeStep !== index
+                        ? "opacity-100 lg:opacity-0"
+                        : "opacity-100"
+                    }`}
+                  >
                     {step.actions.map((action, actionIndex) => (
                       <li key={step.title + "-actions-" + actionIndex}>
                         {action}
                       </li>
                     ))}
                   </ul>
-                ) : null}
+                )}
               </div>
             ))}
           </div>
