@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AIImage from "../assets/illustrations/ai.png";
+import AIImage from "../assets/illustrations/ai.svg";
 import SecurityNetwork from "../assets/illustrations/security-network.svg";
 import { motion } from "framer-motion";
 import {
