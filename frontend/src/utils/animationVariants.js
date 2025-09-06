@@ -23,25 +23,25 @@ export const itemVariants = {
 // Background gradient animations
 export const backgroundVariants = {
   hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1, 
-    transition: { 
+  visible: {
+    opacity: 1,
+    transition: {
       duration: 1.2,
-      ease: "easeOut" 
-    } 
+      ease: "easeOut",
+    },
   },
 };
 
 // Title and heading animations
 export const titleVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { 
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
       duration: 0.7,
-      ease: "easeOut" 
-    } 
+      ease: "easeOut",
+    },
   },
 };
 
@@ -60,38 +60,69 @@ export const logoContainerVariants = {
 // Logo item animations
 export const logoVariants = {
   hidden: { opacity: 0, scale: 0.9 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     scale: 1,
-    transition: { 
+    transition: {
       type: "spring",
       stiffness: 100,
-      damping: 10
-    } 
+      damping: 10,
+    },
   },
 };
 
 // Image hover animations
 export const imageHoverVariants = {
-  hover: { 
-    scale: 1.05, 
-    transition: { 
-      type: "spring", 
-      stiffness: 300 
-    } 
-  }
+  hover: {
+    scale: 1.05,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+    },
+  },
 };
 
 // Card hover animations
 export const cardHoverVariants = {
-  hover: { 
-    scale: 1.03, 
-    transition: { 
-      type: "spring", 
+  hover: {
+    scale: 1.03,
+    transition: {
+      type: "spring",
       stiffness: 300,
-      damping: 10
-    } 
-  }
+      damping: 10,
+    },
+  },
+};
+
+// Image zoom animation on card hover with subtle movement
+export const imageCardHoverVariants = {
+  initial: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.08,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 8,
+    },
+  },
+  hoverWithMovement: {
+    scale: 1.05,
+    y: [0, -5, 5, 0],
+    transition: {
+      scale: {
+        type: "spring",
+        stiffness: 300,
+        damping: 8,
+      },
+      y: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  },
 };
 
 // Floating animation for elements like the world animation
@@ -99,37 +130,37 @@ export const floatingVariants = {
   animate: {
     scale: [1, 1.02, 1],
     rotate: [0, 1, 0, -1, 0],
-    transition: { 
-      duration: 8, 
-      ease: "easeInOut", 
+    transition: {
+      duration: 8,
+      ease: "easeInOut",
       repeat: Infinity,
-      repeatType: "reverse" 
-    } 
-  }
+      repeatType: "reverse",
+    },
+  },
 };
 
 // List item staggered animations
 export const listItemVariants = {
   hidden: { opacity: 0, x: -10 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     x: 0,
-    transition: { 
+    transition: {
       type: "spring",
-      stiffness: 100
-    } 
-  }
+      stiffness: 100,
+    },
+  },
 };
 
 // Counter number animations
 export const counterVariants = {
   hidden: { opacity: 0, scale: 0.5 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     scale: 1,
-    transition: { 
+    transition: {
       type: "spring",
-      stiffness: 100
-    } 
-  }
+      stiffness: 100,
+    },
+  },
 };

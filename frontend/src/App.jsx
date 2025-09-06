@@ -25,10 +25,6 @@ function App() {
     setShowContactForm(true);
   };
 
-  const handleContactSubmit = (formData) => {
-    setShowContactForm(false);
-  };
-
   const handleCloseContactForm = () => {
     setShowContactForm(false);
   };
@@ -61,12 +57,7 @@ function App() {
       </Suspense>
 
       {/* Contact Form Modal */}
-      {showContactForm && (
-        <ContactForm
-          onSubmit={handleContactSubmit}
-          onClose={handleCloseContactForm}
-        />
-      )}
+      {showContactForm && <ContactForm onClose={handleCloseContactForm} />}
     </Layout>
   );
 }

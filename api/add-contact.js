@@ -50,14 +50,14 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           sender: { email: ADMIN_EMAIL, name: "EyeQVault Technologies" },
           to: [{ email, name: `${firstName} ${lastName}` }],
-          subject: "We received your message",
+          subject: "Thankyou for your interest in EyeQVault",
           htmlContent: `
           <!DOCTYPE html>
           <html>
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>EyeQVault - We received your message</title>
+            <title>EyeQVault - Glad to see your interest in securing your company's digital security.</title>
             <style>
               @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
               
