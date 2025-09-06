@@ -75,10 +75,7 @@ const Testimonials = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={titleVariants}
         >
-          <motion.h2
-            className="text-white mb-4 whitespace-nowrap"
-            variants={titleVariants}
-          >
+          <motion.h2 className="text-white mb-4 " variants={titleVariants}>
             Don't just take our word for it.
           </motion.h2>
           <motion.h3 className="text-white/70 text-h2" variants={titleVariants}>
@@ -88,7 +85,7 @@ const Testimonials = () => {
 
         {/* Testimonial */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8 place-items-center pt-8"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 place-items-center pt-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}

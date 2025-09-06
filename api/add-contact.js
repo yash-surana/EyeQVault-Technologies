@@ -129,7 +129,7 @@ export default async function handler(req, res) {
           <body>
             <div class="container">
               <div class="header">
-                <img src="https://eyeqvault.com/eyeqvault-logo.svg" alt="EyeQVault Logo" class="logo">
+                <img src="https://eyeqvault.com/eyeq.svg" alt="EyeQVault Logo" class="logo">
                 <h1>Welcome to EyeQVault!</h1>
                 <h2>Securing your company's future with cutting-edge cybersecurity solutions</h2>
               </div>
@@ -249,7 +249,7 @@ export default async function handler(req, res) {
           <body>
             <div class="container">
               <div class="header">
-                <img src="https://eyeqvault.com/eyeqvault-logo.svg" alt="EyeQVault Logo" class="logo">
+                <img src="https://eyeqvault.com/eyeq.svg" alt="EyeQVault Logo" class="logo">
                 <h1>New Lead from Website</h1>
               </div>
               

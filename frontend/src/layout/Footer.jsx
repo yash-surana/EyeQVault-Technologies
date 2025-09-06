@@ -19,7 +19,7 @@ const Footer = ({ onContactClick }) => {
   return (
     <footer className="bg-primary-gray pt-12 w-full relative">
       <div className="container px-4 lg:px-12 mx-auto w-full mb-20 lg:mb-40 ">
-        <img src="/eye-full-logo.svg" alt="EyeQVault" className="w-32 h-32" />
+        <img src="/eyeq.svg" alt="EyeQVault" className="w-32 h-32 scale-175" />
         <div className="justify-between flex flex-col lg:flex-row gap-x-24 gap-y-8 items-start mt-4">
           <p className="lg:w-96 text-black/70 ">
             Securing your business and your money, every minute of the day.

@@ -158,7 +158,6 @@ const Hero = ({ onContactClick }) => {
               onClick={onContactClick}
               className="btn-primary cursor-pointer w-full sm:w-auto"
               aria-label="Contact us to safeguard your business"
-              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >

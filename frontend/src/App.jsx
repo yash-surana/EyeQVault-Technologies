@@ -9,24 +9,32 @@ const SecurityMethods = lazy(() => import("./components/SecurityMethods"));
 const ActiveThreat = lazy(() => import("./components/ActiveThreat"));
 const CaseStudies = lazy(() => import("./components/CaseStudies"));
 const Testimonials = lazy(() => import("./components/Testimonials"));
+const Offerings = lazy(() => import("./components/Offerings"));
 const Contact = lazy(() => import("./components/Contact"));
 
 // Loading component
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center h-64">
-    <div className="w-8 h-8 border-2 border-cyber-accent border-t-transparent rounded-full animate-spin"></div>
+    <div className="animate-pulse">
+      <div className="h-8 w-32 bg-gray-200 rounded-lg"></div>
+    </div>
   </div>
 );
 
 function App() {
   const [showContactForm, setShowContactForm] = useState(false);
+  const [contactMessage, setContactMessage] = useState("");
 
-  const handleContactClick = () => {
+  const handleContactClick = (text) => {
     setShowContactForm(true);
+    if (text && typeof text === "string") {
+      setContactMessage(text);
+    }
   };
 
   const handleCloseContactForm = () => {
     setShowContactForm(false);
+    setContactMessage("");
   };
 
   return (
@@ -46,6 +54,10 @@ function App() {
       </Suspense>
 
       <Suspense fallback={<LoadingSpinner />}>
+        <Offerings onContactClick={handleContactClick} />
+      </Suspense>
+
+      <Suspense fallback={<LoadingSpinner />}>
         <CaseStudies />
       </Suspense>
       <Suspense fallback={<LoadingSpinner />}>
@@ -57,7 +69,12 @@ function App() {
       </Suspense>
 
       {/* Contact Form Modal */}
-      {showContactForm && <ContactForm onClose={handleCloseContactForm} />}
+      {showContactForm && (
+        <ContactForm
+          onClose={handleCloseContactForm}
+          message={contactMessage}
+        />
+      )}
     </Layout>
   );
 }

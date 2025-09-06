@@ -173,7 +173,7 @@ const Services = () => {
                   <motion.img
                     src={services[1].image}
                     alt={`Illustration for ${services[1].title} service`}
-                    className="w-[80%] mx-auto h-full"
+                    className="w-auto lg:w-[80%] mx-auto h-full"
                     loading="lazy"
                     width="40"
                     height="40"
@@ -210,18 +210,18 @@ const Services = () => {
             </div>
             {/* Card 3 - Wide Card */}
             <motion.article
-              className={`${baseCardStyles} !p-0 flex flex-col sm:flex-row gap-4 items-center pr-0 h-full`}
+              className={`${baseCardStyles} !p-0 flex flex-col-reverse lg:flex-row gap-4 items-center pr-0 h-full`}
               tabIndex="0"
               role="listitem"
               aria-labelledby={services[3].id}
               whileHover="hover"
               initial="initial"
             >
-              <div className="flex flex-col justify-end pt-auto mt-auto p-6 w-1/2">
+              <div className="flex flex-col justify-end pt-auto mt-auto p-6 lg:w-1/2">
                 <h4 id={services[3].id}>{services[3].title}</h4>
                 <p className={descriptionStyles}>{services[3].description}</p>
               </div>
-              <div className={"h-full w-1/2 -mr-4"}>
+              <div className={"h-full lg:w-1/2 -mr-4 w-full "}>
                 <motion.img
                   src={services[3].image}
                   alt={`Illustration for ${services[3].title} service`}
@@ -309,7 +309,7 @@ const Services = () => {
               <motion.img
                 src={services[5].image}
                 alt={`Illustration for ${services[5].title} service`}
-                className="w-[70%] mx-auto h-full "
+                className="w-auto lg:w-[70%] mx-auto h-full "
                 style={{ transformStyle: "preserve-3d" }}
                 loading="lazy"
                 width="80"

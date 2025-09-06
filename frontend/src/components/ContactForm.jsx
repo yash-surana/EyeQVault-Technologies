@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-const ContactForm = ({ onSubmit, onClose }) => {
+const ContactForm = ({ onSubmit, onClose, message }) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [formData, setFormData] = useState({
@@ -10,8 +10,32 @@ const ContactForm = ({ onSubmit, onClose }) => {
     lastName: "",
     email: "",
     phone: "",
-    message: "",
+    message: message,
   });
+
+  // Add useEffect to handle Escape key press
+  useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      }
+    };
+
+    // Add event listener when component mounts
+    document.addEventListener("keydown", handleEscapeKey);
+
+    // Remove event listener when component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [onClose]);
 
   const handleInputChange = (e) => {
     setFormData({

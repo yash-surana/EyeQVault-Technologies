@@ -157,7 +157,7 @@ const SecurityMethods = () => {
               </div>
             ))}
           </div>
-          <div className="order-3 lg:order-3 grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 items-start">
+          <div className="order-2 lg:order-3 grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 items-start">
             {steps.slice(4).map((step, index) => (
               <div
                 key={index + 4}
@@ -189,7 +189,7 @@ const SecurityMethods = () => {
           </div>
 
           {/* Diamond steps */}
-          <div className="order-2 lg:order-2 flex w-full justify-center items-center mt-6 hover:translate-y-3 transition-all duration-300">
+          <div className="order-3 lg:order-2 flex w-full justify-center items-center mt-6 hover:translate-y-3 transition-all duration-300">
             <DiamondSteps activeStep={activeStep + 1} />
           </div>
         </div>
