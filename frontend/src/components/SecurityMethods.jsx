@@ -182,6 +182,7 @@ const SecurityMethods = () => {
             >
               <img
                 src={DiamondSVG}
+                loading="lazy"
                 alt="Diamond Framework"
                 className="w-full h-full object-contain"
               />

@@ -32,6 +32,7 @@ const Contact = ({ onContactClick }) => {
       >
         <img
           src={GraphicBorderSvg}
+          loading="lazy"
           alt="graphic-border"
           className="rotate-90 sm:rotate-0 scale-x-[-1] animate-pulse-white"
         />
@@ -56,6 +57,7 @@ const Contact = ({ onContactClick }) => {
         </div>
         <img
           src={GraphicBorderSvg}
+          loading="lazy"
           alt="graphic-border"
           className="rotate-90 sm:rotate-0 animate-pulse-white"
         />

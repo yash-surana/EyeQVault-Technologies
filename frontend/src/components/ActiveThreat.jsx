@@ -152,6 +152,7 @@ const ActiveThreat = () => {
                 >
                   <img
                     src={logo}
+                    loading="lazy"
                     alt={`Partner logo ${index + 1}`}
                     className="max-h-16 w-full h-full max-w-full object-contain"
                     width={64}
