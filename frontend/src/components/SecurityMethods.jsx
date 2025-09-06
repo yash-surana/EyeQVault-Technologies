@@ -135,7 +135,7 @@ const SecurityMethods = () => {
                 className={`transition-all duration-500 cursor-pointer min-h-full flex flex-col ${
                   activeStep === index
                     ? "opacity-100 scale-100"
-                    : "opacity-60 scale-90"
+                    : "lg:opacity-60 lg:scale-90"
                 }`}
                 onClick={() => handleStepClick(index)}
               >
@@ -165,7 +165,7 @@ const SecurityMethods = () => {
                 className={`transition-all duration-500 cursor-pointer min-h-full flex flex-col ${
                   activeStep === index + 4
                     ? "opacity-100 scale-100"
-                    : "opacity-60 scale-90"
+                    : "lg:opacity-60 lg:scale-90"
                 }`}
                 onClick={() => handleStepClick(index + 4)}
               >
