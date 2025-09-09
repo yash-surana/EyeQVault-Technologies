@@ -126,7 +126,6 @@ const CaseStudies = () => {
             />
             {/* Slide Indicators */}
 
-            {/* Previous Button */}
             <div className="flex justify-end gap-4 items-center">
               <div className="flex space-x-2">
                 {cases.map((_, index) => (

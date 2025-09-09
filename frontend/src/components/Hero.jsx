@@ -4,6 +4,8 @@ import Background1 from "/backgrounds/background-1.svg";
 import Background2 from "/backgrounds/background-2.svg";
 import Background3 from "/backgrounds/background-3.svg";
 import Background4 from "/backgrounds/background-4.svg";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+
 const slides = [
   {
     background: Background1,
@@ -32,6 +34,12 @@ const slides = [
     alt: "Cost-effective security visualization background",
   },
 ];
+
+// Animation variants for the navigation buttons
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const Hero = ({ onContactClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -82,6 +90,18 @@ const Hero = ({ onContactClick }) => {
   const handleSlideChange = (index) => {
     setCurrentSlide(index);
     startSlideTimer();
+  };
+
+  // Add previous slide function
+  const prevSlide = () => {
+    const newIndex = (currentSlide - 1 + slides.length) % slides.length;
+    handleSlideChange(newIndex);
+  };
+
+  // Add next slide function
+  const nextSlide = () => {
+    const newIndex = (currentSlide + 1) % slides.length;
+    handleSlideChange(newIndex);
   };
 
   return (
@@ -176,49 +196,73 @@ const Hero = ({ onContactClick }) => {
         </div>
 
         {/* Slide Indicators with ARIA attributes */}
-        <motion.div
-          className="flex justify-start lg:justify-end space-x-2 z-10 lg:px-4 pb-8 md:pb-12 lg:pb-20 lg:pr-8"
-          role="tablist"
-          aria-label="Presentation slides"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          {slides.map((slide, index) => {
-            const isActive = index === currentSlide;
-            return (
-              <motion.button
-                key={index}
-                onClick={() => handleSlideChange(index)}
-                className={`relative h-2 transition-all duration-300 hover:scale-125 cursor-pointer overflow-hidden ${
-                  isActive
-                    ? "bg-white scale-125 w-6 rounded-lg"
-                    : "bg-white bg-opacity-50 hover:bg-opacity-75 w-3 rounded-full"
-                }`}
-                role="tab"
-                aria-selected={isActive}
-                aria-label={`Slide ${index + 1}: ${slide.title.substring(
-                  0,
-                  30
-                )}...`}
-                aria-controls={`slide-${index}`}
-                whileTap={{ scale: 0.9 }}
-              >
-                {/* Dynamic progress indicator */}
-                {isActive && (
-                  <motion.span
-                    className="absolute top-0 left-0 h-full w-full bg-blue-600 origin-left"
-                    style={{
-                      transform: `scaleX(${slideProgress / 100})`,
-                    }}
-                    transition={{ duration: 0.4, ease: "linear" }}
-                    aria-hidden="true"
-                  />
-                )}
-              </motion.button>
-            );
-          })}
-        </motion.div>
+        <div className="flex flex-row justify-between gap-4 items-start pb-8 md:pb-12 lg:pb-20 lg:pr-8">
+          <motion.div
+            className="flex justify-start lg:justify-end space-x-2 z-10 "
+            role="tablist"
+            aria-label="Presentation slides"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            {slides.map((slide, index) => {
+              const isActive = index === currentSlide;
+              return (
+                <motion.button
+                  key={index}
+                  onClick={() => handleSlideChange(index)}
+                  className={`relative h-2 transition-all duration-300 hover:scale-125 cursor-pointer overflow-hidden ${
+                    isActive
+                      ? "bg-white scale-125 w-6 rounded-lg"
+                      : "bg-white bg-opacity-50 hover:bg-opacity-75 w-3 rounded-full"
+                  }`}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-label={`Slide ${index + 1}: ${slide.title.substring(
+                    0,
+                    30
+                  )}...`}
+                  aria-controls={`slide-${index}`}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {/* Dynamic progress indicator */}
+                  {isActive && (
+                    <motion.span
+                      className="absolute top-0 left-0 h-full w-full bg-blue-600 origin-left"
+                      style={{
+                        transform: `scaleX(${slideProgress / 100})`,
+                      }}
+                      transition={{ duration: 0.4, ease: "linear" }}
+                      aria-hidden="true"
+                    />
+                  )}
+                </motion.button>
+              );
+            })}
+          </motion.div>
+          <div className="flex flex-row gap-2">
+            {" "}
+            <motion.button
+              onClick={prevSlide}
+              className="hover:bg-white/20 border border-white/20 rounded-full p-2 transition-colors duration-200 flex justify-center items-center cursor-pointer"
+              aria-label="Previous slide"
+              variants={itemVariants}
+              whileHover={{ scale: 1.1 }}
+            >
+              <ChevronLeftIcon className="w-5 h-5 text-white" />
+            </motion.button>
+            {/* Next Button */}
+            <motion.button
+              onClick={nextSlide}
+              className=" hover:bg-white/20 border border-white/20 rounded-full p-2 transition-colors duration-200 flex justify-center items-center cursor-pointer"
+              aria-label="Next slide"
+              variants={itemVariants}
+              whileHover={{ scale: 1.1 }}
+            >
+              <ChevronRightIcon className="w-5 h-5 text-white" />
+            </motion.button>
+          </div>
+        </div>
       </div>
     </section>
   );
