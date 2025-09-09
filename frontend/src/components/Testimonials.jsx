@@ -9,28 +9,28 @@ import {
 
 const array = [
   {
-    body: "With EyeQVault, we've seen a 50% reduction in false positive alerts, allowing our analysts to focus on real threats and eliminating false mental pressure. This has significantly cut down our mean time to resolution, making our entire security posture smarter and more effective.",
+    body: "With EyeQVault, we've seen a 50% reduction in false positive alerts, allowing our analysts to focus on real threats and <strong>eliminating false mental pressure</strong>. This has significantly cut down our mean time to resolution, making our entire security posture smarter and more effective.",
     name: "Bhavesh Kumar",
     company: "SK Finance",
     position: "CSO",
     rating: 5,
   },
   {
-    body: "EyeQVault simplified our security. Their platform integrated seamlessly with our existing systems, giving us a unified view. Their team is top-notch - true professionals who are now an extension of our own security operations center.",
+    body: "EyeQVault simplified our security. Their platform integrated seamlessly with our existing systems, giving us a unified view. Their team is top-notch - true professionals who are now an <strong>extension of our own security operations center.</strong>",
     name: "Rahul Agarwal",
     company: "Ideal Insurance",
     position: "MD",
     rating: 5,
   },
   {
-    body: "Before EyeQVault, our board was very vigilant about our cybersecurity and its potential effect on company reputation. EyeQVault didn't just sell us a product; they provided a comprehensive solution that gave us peace of mind. Our operations and IP are now secure, and we can focus on what we do best—growing our business.",
+    body: "Before EyeQVault, our board was very vigilant about our cybersecurity and its potential effect on company reputation. EyeQVault didn't just sell us a product; they provided a comprehensive solution that <strong>gave us peace of mind</strong>. Our operations and IP are now secure, and we can focus on what we do best—growing our business.",
     name: "Ravi Goenka",
     company: "Laxmi Organic Limited",
     position: "Chairman",
     rating: 5,
   },
   {
-    body: "EyeQVault's real-time threat intelligence and proactive threat hunting helped us anticipate and neutralize threats to our online sales portal before they caused damage. We were also able to protect our sales data from competitors.",
+    body: "EyeQVault's real-time threat intelligence and proactive threat hunting helped us anticipate and <strong>neutralize threats to our online sales portal</strong> before they caused damage.</strong> We were also able to protect our sales data from competitors.",
     name: "Kul Taneja",
     company: "Pratap & Sons",
     position: "MD",

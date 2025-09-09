@@ -23,18 +23,18 @@ const LoadingSpinner = () => (
 
 function App() {
   const [showContactForm, setShowContactForm] = useState(false);
-  const [contactMessage, setContactMessage] = useState("");
+  const [chosenService, setChosenService] = useState("");
 
   const handleContactClick = (text) => {
     setShowContactForm(true);
     if (text && typeof text === "string") {
-      setContactMessage(text);
+      setChosenService(text);
     }
   };
 
   const handleCloseContactForm = () => {
     setShowContactForm(false);
-    setContactMessage("");
+    setChosenService("");
   };
 
   return (
@@ -72,7 +72,7 @@ function App() {
       {showContactForm && (
         <ContactForm
           onClose={handleCloseContactForm}
-          message={contactMessage}
+          chosenService={chosenService}
         />
       )}
     </Layout>

@@ -17,6 +17,7 @@ const Offerings = ({ onContactClick }) => {
   const tabs = [
     {
       id: 1,
+      type: "Managing Directors",
       title: "For Managing Directors",
       heading: "The Digital Peace of Mind Program",
       subheading: "For Managing Directors & Boards who want clarity and calm",
@@ -44,6 +45,7 @@ const Offerings = ({ onContactClick }) => {
     },
     {
       id: 2,
+      type: "Chief Security Officers",
       title: "For Chief Security Officers",
       heading: "The Cyber Command Program",
       subheading:
@@ -179,7 +181,7 @@ const Offerings = ({ onContactClick }) => {
 
                 <motion.button
                   className="btn-primary mb-3"
-                  onClick={() => onContactClick(tab.title)}
+                  onClick={() => onContactClick(tab.type || tab.title)}
                   whileTap={{ scale: 0.95 }}
                 >
                   {tab.cta}

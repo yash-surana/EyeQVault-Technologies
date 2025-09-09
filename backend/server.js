@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import handler from "../api/add-contact";
+import handler from "../api/add-contact.js";
 
 dotenv.config();
 

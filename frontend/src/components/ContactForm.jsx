@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-const ContactForm = ({ onSubmit, onClose, message }) => {
+const ContactForm = ({ onSubmit, onClose, chosenService }) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    designation: "",
     phone: "",
-    message: message,
+    message: "",
   });
 
-  // Add useEffect to handle Escape key press
   useEffect(() => {
     const handleEscapeKey = (event) => {
       if (event.key === "Escape") {
@@ -52,7 +52,10 @@ const ContactForm = ({ onSubmit, onClose, message }) => {
       const res = await fetch("/api/add-contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          chosenService: chosenService || "General Inquiry",
+        }),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
@@ -60,12 +63,22 @@ const ContactForm = ({ onSubmit, onClose, message }) => {
         firstName: "",
         lastName: "",
         email: "",
+        designation: "",
         phone: "",
         message: "",
+        chosenService: chosenService,
       });
       if (onSubmit) {
         onSubmit(formData);
       }
+
+      // Scroll to the bottom of the form after successful submission
+      setTimeout(() => {
+        const formEnd = document.getElementById("form-end");
+        if (formEnd) {
+          formEnd.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
     } catch (err) {
       console.error(err);
       setStatus("error");
@@ -150,7 +163,17 @@ const ContactForm = ({ onSubmit, onClose, message }) => {
               />
             </div>
 
-            <div>
+            <div className="flex flex-row gap-4 justify-between items-center">
+              <input
+                type="text"
+                id="designation"
+                name="designation"
+                value={formData.designation}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white/90 placeholder-gray-500 focus:outline-none focus:bg-white/10 text-sm"
+                placeholder="Designation*"
+              />
               <input
                 type="tel"
                 id="phone"
@@ -210,6 +233,7 @@ const ContactForm = ({ onSubmit, onClose, message }) => {
                 ❌ Something went wrong. Please try again later.
               </p>
             )}
+            <div id="form-end" />
           </form>
         </motion.div>
       </motion.div>

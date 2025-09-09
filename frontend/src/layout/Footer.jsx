@@ -21,9 +21,32 @@ const Footer = ({ onContactClick }) => {
       <div className="container px-4 lg:px-12 mx-auto w-full mb-20 lg:mb-40 ">
         <img src="/eyeq.svg" alt="EyeQVault" className="w-32 h-32 scale-175" />
         <div className="justify-between flex flex-col lg:flex-row gap-x-24 gap-y-8 items-start mt-4">
-          <p className="lg:w-96 text-black/70 ">
-            Securing your business and your money, every minute of the day.
-          </p>
+          <div className="text-black/70">
+            <p className="lg:w-96  ">
+              Securing your business and your money, every minute of the day.
+            </p>
+            <p className="lg:w-96  pt-4 text-black/50">Contact us:</p>
+            <ul className="text-black/50">
+              <li>
+                Email :{" "}
+                <a
+                  href="mailto:info@eyeqvault.com"
+                  className="text-black/70 hover:underline hover:text-black"
+                >
+                  info@eyeqvault.com
+                </a>
+              </li>
+              <li>
+                Phone :{" "}
+                <a
+                  href="tel:+916375051662"
+                  className="text-black/70 hover:underline hover:text-black"
+                >
+                  +91 63750 51662
+                </a>
+              </li>
+            </ul>
+          </div>
           <div className="gap-x-8 gap-y-2 flex flex-col lg:flex-row flex-wrap justify-end items-start lg:items-center  lg:max-w-[60%] text-left lg:text-right text-black">
             {links.map((link, index) => {
               return (

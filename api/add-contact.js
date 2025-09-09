@@ -7,7 +7,15 @@ export default async function handler(req, res) {
   }
   try {
     const body = req.body || {};
-    const { firstName, lastName, email, phone, message } = body;
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      message,
+      designation,
+      chosenService,
+    } = body;
 
     if (!firstName || !lastName || !email) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -15,6 +23,8 @@ export default async function handler(req, res) {
 
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "info@eyeqvault.com";
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
+    const GOOGLE_SHEETS_APP_SCRIPT_URL = process.env.LEADS_APP_SCRIPT_URL;
+
     if (!BREVO_API_KEY) {
       return res.status(500).json({ error: "Missing BREVO_API_KEY" });
     }
@@ -24,6 +34,9 @@ export default async function handler(req, res) {
       "content-type": "application/json",
       "api-key": BREVO_API_KEY,
     };
+
+    // Create timestamp for Google Sheets
+    const timestamp = new Date().toISOString();
 
     // Add contact
     await fetch("https://api.brevo.com/v3/contacts", {
@@ -36,11 +49,38 @@ export default async function handler(req, res) {
           LASTNAME: lastName,
           PHONE: phone,
           MESSAGE: message,
+          DESIGNATION: designation,
+          CHOSENSERVICE: chosenService,
         },
         updateEnabled: true,
         listIds: [3], // ID of Website Form Leads List on Brevo
       }),
     });
+
+    // Send data to Google Sheets via App Script
+    if (GOOGLE_SHEETS_APP_SCRIPT_URL) {
+      try {
+        await fetch(GOOGLE_SHEETS_APP_SCRIPT_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            phone: phone || "-",
+            message: message || "-",
+            designation: designation || "-",
+            chosenService: chosenService || "General Inquiry",
+            timestamp,
+          }),
+        });
+      } catch (sheetErr) {
+        // Log error but don't fail the whole request
+        console.error("LOG | Google Sheets logging error:", sheetErr);
+      }
+    }
 
     // Send emails (user + admin)
     await Promise.all([
@@ -150,6 +190,7 @@ export default async function handler(req, res) {
               
               <div class="footer">
                 <p>© ${new Date().getFullYear()} EyeQVault Technologies. All rights reserved.</p>
+                <p>Reach out to us at <a href="tel:+916375051662">+91 6375051662</a>.</p>
                 <p>info@eyeqvault.com | <a href="https://www.eyeqvault.com">www.eyeqvault.com</a></p>
               </div>
             </div>
@@ -260,9 +301,14 @@ export default async function handler(req, res) {
                   <li><strong>Name:</strong> ${firstName} ${lastName}</li>
                   <li><strong>Email:</strong> ${email}</li>
                   <li><strong>Phone:</strong> ${phone || "N/A"}</li>
+                  <li><strong>Designation:</strong> ${designation || "N/A"}</li>
+                  <li><strong>Chosen Service:</strong> ${
+                    chosenService || "General Inquiry"
+                  }</li>
                   <li><strong>Message:</strong> ${
                     message || "No message provided"
                   }</li>
+                  <li><strong>Submission Time:</strong> ${new Date().toLocaleString()}</li>
                 </ul>
               </div>
               
