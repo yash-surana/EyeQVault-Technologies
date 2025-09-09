@@ -31,7 +31,7 @@ const Offerings = ({ onContactClick }) => {
         {
           title: "Cyber Insurance Advantage",
           description:
-            "We prepare your enterprise to qualify for lower cyber insurance premiums — translating to direct cost savings.",
+            "We prepare your enterprise to qualify for lower cyber insurance premiums - translating to direct cost savings.",
         },
         {
           title: "Executive Breach Drill",
@@ -65,7 +65,7 @@ const Offerings = ({ onContactClick }) => {
         {
           title: "Regulatory Compliance Heatmap",
           description:
-            "A custom report highlighting where you'd fail an audit today — and what to fix first.",
+            "A custom report highlighting where you'd fail an audit today - and what to fix first.",
         },
         {
           title: "Incident Response Fast-Track",

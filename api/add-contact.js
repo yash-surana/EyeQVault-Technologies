@@ -17,9 +17,38 @@ export default async function handler(req, res) {
       chosenService,
     } = body;
 
+    // Sanitize and validate inputs
     if (!firstName || !lastName || !email) {
       return res.status(400).json({ error: "Missing required fields" });
     }
+
+    // Email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: "Invalid email format" });
+    }
+
+    // Sanitize text inputs to prevent XSS
+    const sanitizeInput = (input) => {
+      if (!input) return input;
+
+      const trimmedInput = String(input).trim();
+      return trimmedInput
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    };
+
+    const sanitizedFirstName = sanitizeInput(firstName);
+    const sanitizedLastName = sanitizeInput(lastName);
+    const sanitizedMessage = sanitizeInput(message);
+    const sanitizedDesignation = sanitizeInput(designation);
+    const sanitizedChosenService = sanitizeInput(chosenService);
+    const sanitizedPhone = phone
+      ? String(phone).replace(/[^\d+\-\s()]/g, "")
+      : phone;
 
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "info@eyeqvault.com";
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
@@ -45,12 +74,12 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         email,
         attributes: {
-          FIRSTNAME: firstName,
-          LASTNAME: lastName,
-          PHONE: phone,
-          MESSAGE: message,
-          DESIGNATION: designation,
-          CHOSENSERVICE: chosenService,
+          FIRSTNAME: sanitizedFirstName,
+          LASTNAME: sanitizedLastName,
+          PHONE: sanitizedPhone,
+          MESSAGE: sanitizedMessage,
+          DESIGNATION: sanitizedDesignation,
+          CHOSENSERVICE: sanitizedChosenService,
         },
         updateEnabled: true,
         listIds: [3], // ID of Website Form Leads List on Brevo
@@ -66,13 +95,13 @@ export default async function handler(req, res) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            firstName,
-            lastName,
-            email,
-            phone: phone || "-",
-            message: message || "-",
-            designation: designation || "-",
-            chosenService: chosenService || "General Inquiry",
+            firstName: sanitizedFirstName,
+            lastName: sanitizedLastName,
+            email: email,
+            phone: sanitizedPhone || "-",
+            message: sanitizedMessage || "-",
+            designation: sanitizedDesignation || "-",
+            chosenService: sanitizedChosenService || "General Inquiry",
             timestamp,
           }),
         });
@@ -174,7 +203,7 @@ export default async function handler(req, res) {
                 <h2>Securing your company's future with cutting-edge cybersecurity solutions</h2>
               </div>
               
-              <p>Hi ${firstName},</p>
+              <p>Hi ${sanitizedFirstName},</p>
               
               <p>Thanks for reaching out to EyeQVault. We've received your message and are glad to see your interest in our cybersecurity solutions.</p>
               
@@ -182,7 +211,7 @@ export default async function handler(req, res) {
               
               <div class="message-box">
                 <strong>Your message:</strong>
-                <p>${message || "No message provided"}</p>
+                <p>${sanitizedMessage || "No message provided"}</p>
               </div>
               
               <p>In the meantime, feel free to explore our website for more information about our services and solutions.</p>
@@ -298,15 +327,17 @@ export default async function handler(req, res) {
               
               <div class="lead-details">
                 <ul>
-                  <li><strong>Name:</strong> ${firstName} ${lastName}</li>
+                  <li><strong>Name:</strong> ${sanitizedFirstName} ${sanitizedLastName}</li>
                   <li><strong>Email:</strong> ${email}</li>
-                  <li><strong>Phone:</strong> ${phone || "N/A"}</li>
-                  <li><strong>Designation:</strong> ${designation || "N/A"}</li>
+                  <li><strong>Phone:</strong> ${sanitizedPhone || "N/A"}</li>
+                  <li><strong>Designation:</strong> ${
+                    sanitizedDesignation || "N/A"
+                  }</li>
                   <li><strong>Chosen Service:</strong> ${
-                    chosenService || "General Inquiry"
+                    sanitizedChosenService || "General Inquiry"
                   }</li>
                   <li><strong>Message:</strong> ${
-                    message || "No message provided"
+                    sanitizedMessage || "No message provided"
                   }</li>
                   <li><strong>Submission Time:</strong> ${new Date().toLocaleString()}</li>
                 </ul>

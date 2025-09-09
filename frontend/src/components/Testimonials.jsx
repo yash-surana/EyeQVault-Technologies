@@ -23,14 +23,14 @@ const array = [
     rating: 5,
   },
   {
-    body: "Before EyeQVault, our board was very vigilant about our cybersecurity and its potential effect on company reputation. EyeQVault didn't just sell us a product; they provided a comprehensive solution that <strong>gave us peace of mind</strong>. Our operations and IP are now secure, and we can focus on what we do best—growing our business.",
+    body: "Before EyeQVault, our board was very vigilant about our cybersecurity and its potential effect on company reputation. EyeQVault didn't just sell us a product; they provided a comprehensive solution that <strong>gave us peace of mind</strong>. Our operations and IP are now secure, and we can focus on what we do best-growing our business.",
     name: "Ravi Goenka",
     company: "Laxmi Organic Limited",
     position: "Chairman",
     rating: 5,
   },
   {
-    body: "EyeQVault's real-time threat intelligence and proactive threat hunting helped us anticipate and <strong>neutralize threats to our online sales portal</strong> before they caused damage.</strong> We were also able to protect our sales data from competitors.",
+    body: "EyeQVault's real-time threat intelligence and proactive threat hunting helped us anticipate and <strong>neutralize threats to our online sales portal</strong> before they caused damage.</strong> We were also able to <strong>protect our sales data from competitors.</strong>",
     name: "Kul Taneja",
     company: "Pratap & Sons",
     position: "MD",
@@ -99,9 +99,10 @@ const Testimonials = () => {
                 background: "linear-gradient(-45deg, #21323A 24%, #181F23 96%)",
               }}
             >
-              <p className="text-base lg:lg  text-white/90 leading-relaxed">
-                {item.body}
-              </p>
+              <p
+                className="text-base lg:lg  text-white/90 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: item.body }}
+              />
               <div className="flex items-center justify-between gap-4 mt-2 w-full">
                 <div className="">
                   <p className="text-white/90 font-medium text-sm">
