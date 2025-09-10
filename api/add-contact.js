@@ -1,6 +1,5 @@
 // API endpoint to add a contact to Brevo CRM and send confirmation emails
 // Used to handle both Express and serverless function environments (AWS Lambda, Vercel)
-import Logo from "./logo-base64";
 
 export default async function handler(req, res) {
   if (req.method && req.method !== "POST") {
@@ -151,12 +150,7 @@ export default async function handler(req, res) {
                 text-align: center;
                 margin-bottom: 30px;
               }
-              
-              .logo {
-                max-width: 180px;
-                margin-bottom: 20px;
-              }
-              
+          
               h1 {
                 font-weight: 700;
                 font-size: 24px;
@@ -199,7 +193,7 @@ export default async function handler(req, res) {
           <body>
             <div class="container">
               <div class="header">
-                <img src="data:image/svg+xml;base64,${Logo}" alt="EyeQVault Logo" class="logo">
+              
                 <h1>Welcome to EyeQVault!</h1>
                 <h2>Securing your company's future with cutting-edge cybersecurity solutions</h2>
               </div>
@@ -245,7 +239,7 @@ export default async function handler(req, res) {
             <title>EyeQVault - New Contact Form Submission</title>
             <style>
               @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-              
+
               body {
                 font-family: 'Poppins', sans-serif;
                 line-height: 1.6;
@@ -254,37 +248,32 @@ export default async function handler(req, res) {
                 margin: 0;
                 padding: 0;
               }
-              
+
               .container {
                 max-width: 600px;
                 margin: 0 auto;
                 padding: 40px 20px;
                 background-color: white;
               }
-              
+
               .header {
                 text-align: center;
                 margin-bottom: 30px;
               }
-              
-              .logo {
-                max-width: 180px;
-                margin-bottom: 20px;
-              }
-              
+
               h1 {
                 font-weight: 700;
                 font-size: 24px;
                 margin-bottom: 20px;
                 color: #181818;
               }
-              
+
               p {
                 margin-bottom: 16px;
                 font-size: 16px;
                 color: #585857;
               }
-              
+
               .lead-details {
                 background-color: #f5f5f5;
                 padding: 20px;
@@ -292,21 +281,21 @@ export default async function handler(req, res) {
                 margin: 20px 0;
                 border-left: 4px solid #0e58ba;
               }
-              
+
               .lead-details ul {
                 list-style-type: none;
                 padding: 0;
               }
-              
+
               .lead-details li {
                 padding: 8px 0;
                 border-bottom: 1px solid #e5e5e5;
               }
-              
+
               .lead-details li:last-child {
                 border-bottom: none;
               }
-              
+
               .footer {
                 margin-top: 40px;
                 padding-top: 20px;
@@ -320,12 +309,11 @@ export default async function handler(req, res) {
           <body>
             <div class="container">
               <div class="header">
-                <img src="data:image/svg+xml;base64,${Logo}" alt="EyeQVault Logo" class="logo">
                 <h1>New Lead from Website</h1>
               </div>
-              
+
               <p>A new contact form submission has been received from the website:</p>
-              
+
               <div class="lead-details">
                 <ul>
                   <li><strong>Name:</strong> ${sanitizedFirstName} ${sanitizedLastName}</li>
@@ -343,9 +331,9 @@ export default async function handler(req, res) {
                   <li><strong>Submission Time:</strong> ${new Date().toLocaleString()}</li>
                 </ul>
               </div>
-              
+
               <p>Please follow up with this lead as soon as possible.</p>
-              
+
               <div class="footer">
                 <p>© ${new Date().getFullYear()} EyeQVault Technologies. All rights reserved.</p>
                 <p>This is an automated message from your website contact form.</p>
