@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import DiamondSVG from "../assets/illustrations/diamond.svg";
 import { imageCardHoverVariants } from "../utils/animationVariants";
 import Lines2 from "../assets/illustrations/lines-2.svg";
@@ -69,9 +69,14 @@ const SecurityMethods = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const stepRefs = useRef([]);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { amount: 0.2 });
   const STEP_DURATION = 7000; // 7 seconds per step
 
   useEffect(() => {
+    // Only start timers when section is in view
+    if (!isInView) return;
+
     // Reset progress when active step changes
     setProgress(0);
 
@@ -92,31 +97,7 @@ const SecurityMethods = () => {
       clearInterval(progressInterval);
       clearInterval(stepInterval);
     };
-  }, [activeStep]);
-
-  // Auto-scroll to active step
-  // useEffect(() => {
-  //   if (stepRefs.current[activeStep]) {
-  //     const element = stepRefs.current[activeStep];
-  //     const isTopSection = activeStep <= 3;
-
-  //     element.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: isTopSection ? "start" : "end",
-  //       inline: "nearest",
-  //     });
-
-  //     // Calculate scroll position
-  //     const headerOffset = isTopSection ? 50 : -50; // Negative offset for bottom sections
-  //     const elementPosition = element.getBoundingClientRect().top;
-  //     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-  //     window.scrollTo({
-  //       top: offsetPosition,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // }, [activeStep]);
+  }, [activeStep, isInView]);
 
   const handleStepClick = (stepIndex) => {
     setActiveStep(stepIndex);
@@ -124,7 +105,7 @@ const SecurityMethods = () => {
   };
 
   return (
-    <section className="bg-primary-gray text-black">
+    <section ref={sectionRef} className="bg-primary-gray text-black">
       <div className="">
         <motion.div
           className="text-left mb-12 common-container !pb-0"
@@ -153,7 +134,7 @@ const SecurityMethods = () => {
               <div
                 key={index}
                 ref={(el) => (stepRefs.current[index] = el)}
-                className={`transition-all duration-500 cursor-pointer min-h-full flex flex-col ${
+                className={`transition-all duration-500 ease-in-out cursor-pointer flex flex-col ${
                   index === 0 || index === 3 ? "lg:mt-12" : "lg:mt-0"
                 } hover:scale-100 group ${
                   activeStep === index
@@ -234,9 +215,9 @@ const SecurityMethods = () => {
               <div
                 key={index + 4}
                 ref={(el) => (stepRefs.current[index + 4] = el)}
-                className={`transition-all duration-50 ${
+                className={`transition-all duration-500 ease-in-out ${
                   index === 0 || index === 2 ? "lg:-mt-12" : "mt-0"
-                } cursor-pointer min-h-full flex flex-col ${
+                } cursor-pointer flex flex-col ${
                   activeStep === index + 4
                     ? "opacity-100 scale-100"
                     : "lg:opacity-60 lg:scale-90"
