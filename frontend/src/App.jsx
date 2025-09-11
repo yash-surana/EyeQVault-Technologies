@@ -1,7 +1,8 @@
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState, Suspense, lazy, useEffect } from "react";
 import Layout from "./layout/Layout";
 import ContactForm from "./components/ContactForm";
 import Hero from "./components/Hero";
+import { useSearchParams } from "react-router-dom";
 
 // Lazy load components for code splitting
 const Services = lazy(() => import("./components/Services"));
@@ -24,6 +25,14 @@ const LoadingSpinner = () => (
 function App() {
   const [showContactForm, setShowContactForm] = useState(false);
   const [chosenService, setChosenService] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Check for contact query parameter
+  useEffect(() => {
+    if (searchParams.get("contact") === "true") {
+      setShowContactForm(true);
+    }
+  }, [searchParams]);
 
   const handleContactClick = (text) => {
     setShowContactForm(true);
@@ -35,6 +44,11 @@ function App() {
   const handleCloseContactForm = () => {
     setShowContactForm(false);
     setChosenService("");
+    // Remove the contact parameter from URL when closing the form
+    if (searchParams.has("contact")) {
+      searchParams.delete("contact");
+      setSearchParams(searchParams);
+    }
   };
 
   return (
